@@ -1,0 +1,23 @@
+﻿@page "/"
+@using DemoJSandBlazor.Services
+@inject DemoJSandBlazor.Services.InteropExample InteropExample
+
+<PageTitle>Index</PageTitle>
+<button @onclick="ShowAlert">Hoi!</button>
+<button @onclick="ShowPrompt">Ik ben...</button>
+
+@code {
+    private async Task ShowAlert()
+    {
+        await InteropExample.ShowAlert("Hallo!");
+    }
+
+    private async Task ShowPrompt()
+    {
+        string naam = await InteropExample.ShowPrompt("Hallo! Wie ben jij?");
+        if(!string.IsNullOrEmpty(naam))
+        {
+            await InteropExample.ShowAlert($"Hallo {naam}!");
+        }
+    }
+}
